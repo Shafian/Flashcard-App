@@ -8,7 +8,8 @@
 ### App Walk-though
 
 
-![](https://i.imgur.com/1btupyg.gif)
+![](https://i.imgur.com/5OGaqB1.gif)
+
 
 
 ## Required
