@@ -3,14 +3,20 @@
 ## Lab 3
 
 ### App Description
-`TODO://` Add app description
+`TODO://` This is a flashcard app that helps you study
 
 ### App Walk-though
-`TODO://` Add the URL to your animated app walk-though `gif` in the image tag below. Make sure the gif actually renders and animates when viewing this README. (☝️ Remove this paragraph after after adding gif)
 
-<img src="YOUR_GIF_URL_HERE" width=200><br>
+ User can browse through multiple flashcards 
+<img src="[Uploading file..._d2y22sfhm]()" width=200><br>
 
-`TODO://` In the User stories section below, add an `x` between the `-[ ]` like this `- [x]` for any user story you complete. (☝️ Remove this paragraph after after checking off user stories)
+![](https://i.imgur.com/hN5YpZ7.gif)
+
+User can re-open the app and see previously created flashcards
+
+![](https://i.imgur.com/tfGJjx3.gif)
+
+
 
 ## Required
 - [x] User can browse through multiple flashcards
