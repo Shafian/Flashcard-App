@@ -16,7 +16,8 @@ User can re-open the app and see previously created flashcards
 
 
 
-![](https://i.imgur.com/qjPWmdd.gif)
+<img src=" ![Uploading file..._4u54riban]()
+ " width=200><br>
 
 
 
