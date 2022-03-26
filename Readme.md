@@ -14,7 +14,10 @@
 
 User can re-open the app and see previously created flashcards
 
-![](https://i.imgur.com/tfGJjx3.gif)
+
+
+![](https://i.imgur.com/qjPWmdd.gif)
+
 
 
 
