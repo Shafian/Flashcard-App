@@ -11,8 +11,8 @@
  ![](https://i.imgur.com/8073Puk.gif)
  
  User can browse through multiple flashcards
- 
-![](https://i.imgur.com/hc7raOR.gif)
+ ![](https://i.imgur.com/X8FZZLA.gif)
+
 
 
 
