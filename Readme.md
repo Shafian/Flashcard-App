@@ -12,7 +12,7 @@
  
  User can browse through multiple flashcards
  
- ![](https://i.imgur.com/hc7raOR.gif)
+![](https://i.imgur.com/hc7raOR.gif)
 
 
 
