@@ -30,7 +30,14 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        readSavedFlashcards()
+        if flashcards.count == 0 {
         updateFlashcard(question:"How much stars are in the Sky?", answer: " 50 billion")
+    }
+        else {
+            updateLabels()
+            updateNextPrevButtons()
+        }
     }
 
     @IBAction func didTaponFlashcard(_ sender: Any) {
@@ -91,33 +98,29 @@ class ViewController: UIViewController {
     
     func saveAllFlashcardsToDisk() {
         
-        let dictionaryArray = flashcards.map { (card) -> [String: String] in
-            return ["question": card.question, "answer": card.answer]
+            // From flashcard array to dictionary array
+            let dictionaryArray = flashcards.map { (card) -> [String: String] in return ["question": card.question, "answer": card.answer]
+            }
+        
+            // Save array on siak using UserDefaults
+            UserDefaults.standard.set(dictionaryArray, forKey: "flashcards")
+            
+            // Log
+            print("🎉 Flashcards saved to UserDefaults")
         }
         
-        UserDefaults.standard.set(flashcards, forKey: "flashcards")
-        print("Flash saved to UserDefaults")
-    }
     
     func readSavedFlashcards() {
-        
-        let saveCards = dictionaryArray.map  { dictionary -> Flashcard in
-            return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!)
-        }
+           if let dictionaryArray = UserDefaults.standard.array(forKey: "flashcards") as? [[String: String]] {
+               
+               let savedCards = dictionaryArray.map { dictionary -> Flashcard in
+                   return Flashcard(question: dictionary["question"]!, answer: dictionary["answer"]!)
+               }
+               
+               flashcards.append(contentsOf: savedCards)
+           }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        readSavedFlashcards()
-        if flashcards.count == 0 {
-            updateFlashcard(question: <#T##String#>, answer: <#T##String#>)
-            
-            else {
-                updateLabels()
-                updateNextPrevButtons()
-            }
-        }
-    }
+    
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
            let navigationController = segue.destination as! UINavigationController
@@ -125,5 +128,6 @@ class ViewController: UIViewController {
            
            creationController.flashcardsController = self
        }
-}
 
+
+}
