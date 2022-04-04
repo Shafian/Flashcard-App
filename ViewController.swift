@@ -17,7 +17,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var frontLabel: UILabel!
     @IBOutlet weak var backLabel: UILabel!
-    
+    @IBOutlet weak var card: UIView!
     
     @IBOutlet weak var nextButton: UIButton!
     
@@ -41,19 +41,52 @@ class ViewController: UIViewController {
     }
 
     @IBAction func didTaponFlashcard(_ sender: Any) {
-        frontLabel.isHidden = true
+        flipFlashcard()
     }
+    func flipFlashcard() {
+            if(frontLabel.isHidden == false) {
+                frontLabel.isHidden = true
+                
+                UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: { self.frontLabel.isHidden = true})
+                
+            } else {
+                frontLabel.isHidden = false
+                
+                UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: { self.frontLabel.isHidden = false})
+            }
+            
+            }
+        
+        func animateCardOut() {
+            UIView.animate(withDuration: 0.2, animations: { self.card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0) }, completion: { finished in
+                
+                self.updateLabels()
+                
+                self.animateCardIn()
+                
+            })
+        }
     
+    func animateCardIn() {
+           card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+           
+           UIView.animate(withDuration: 0.4) {
+               self.card.transform = CGAffineTransform.identity
+           }
+       }
+       
     @IBAction func didTapOnNext(_ sender: Any) {
         currentIndex = currentIndex + 1
         
-       updateLabels()
+       //updateLabels()
         updateNextPrevButtons()
+        animateCardOut()
     }
     
     @IBAction func didTapOnPrev(_ sender: Any) {
         currentIndex = currentIndex - 1
         updateLabels()
+        animateCardIn()
     }
     
     func updateLabels() {
@@ -122,6 +155,50 @@ class ViewController: UIViewController {
     }
     
 
+    
+    
+    @IBAction func didTapOnDelete(_ sender: Any) {
+           
+           // Show confirmation
+           let alert = UIAlertController(title: "Delete flashcard", message: "Are you sure you want to delete flashcard?", preferredStyle: .actionSheet)
+           
+           // Create delete action and add to the alert
+           let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+               self.deleteCurrentFlashcard()
+           }
+           alert.addAction(deleteAction)
+           
+           // Create cancel action and add to the alert
+           let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+           alert.addAction(cancelAction)
+           
+           // Present the alert
+           present(alert, animated: true)
+       }
+       
+       
+       func deleteCurrentFlashcard () {
+           
+           // Delete flashcard at the current index if not the only remaining card
+           if flashcards.count != 1 {
+               flashcards.remove(at: currentIndex)
+           }
+           
+           // Special case: check if last card deleted
+           if currentIndex > flashcards.count - 1 {
+               currentIndex = flashcards.count - 1
+           }
+           
+           updateLabels()
+           updateNextPrevButtons()
+           saveAllFlashcardsToDisk()
+       }
+    
+    
+    
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
            let navigationController = segue.destination as! UINavigationController
            let creationController = navigationController.topViewController as! CreationViewController
